@@ -33,6 +33,8 @@ int insertat(node_t**, int, int);
 int delete_last(node_t*);
 int delete_first(node_t**);
 int deleteat(node_t**, int);
+void reverse(node_t**);
+node_t* reverse1(node_t*);
 int length(node_t*);
 void print(node_t*);
 
@@ -48,6 +50,9 @@ void main(int argc, char *argv[]){
 	append(head, 6);
 	print(head);
 	append(head, 7);
+	print(head);
+	//reverse(&head);
+	head=reverse1(head);
 	print(head);
 	//remove_last(head);
 	deleteat(&head, length(head)-1);
@@ -69,6 +74,49 @@ void main(int argc, char *argv[]){
 	print(head);
 	deleteat(&head, length(head)-1);
 	print(head);
+}
+
+/**
+ * reverse the linked list
+ */
+void reverse(node_t** head){
+	node_t *current, *prev, *next;
+	current=*head;
+	prev=NULL;
+	while(current != NULL){
+		//1st set the next node so we don't lose the link
+		next=current->next;
+
+		//2nd re-set the link of current node to point
+		// to the previous node
+		current->next=prev;
+
+		//3rd move the previous node to current position
+		prev=current;
+
+		//4th move the current node to next position
+		current=next;
+	}
+	*head=prev;
+}
+
+/**
+ * reverse the linked list via recursion
+ */
+node_t* reverse1(node_t* head){
+	if(head == NULL || head->next == NULL){
+		return head;
+	}
+	node_t* rest=reverse1(head->next);
+
+	// now the head is pointing to last node
+	// set the link of last node to point to 2nd last node
+	head->next->next=head;
+
+	//set the link of 2nd last node to NULL
+	head->next=NULL;
+
+	return rest;
 }
 
 /**
