@@ -70,11 +70,12 @@ void quickSort(int* numbers, int length) {
 
 int main(void) {
   int in1[]=   {4,3,2,1};
+  int length=4;
   
-  //sort the pricess in ascending order
-  quickSort(in1, 4);
-  for(int j=0;j<prices_count;j++)
-    printf("%d ",*(prices+j));
+  //sort the array in ascending order
+  quickSort(in1, length);
+  for(int j=0;j<length;j++)
+    printf("%d ",*(in1+j));
   
   return 0;
 }
